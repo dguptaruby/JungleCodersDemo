@@ -29,6 +29,6 @@
   <strong>Birthday:</strong>
   <%= @contact.birthday %>
 </p>
-
+<%= link_to 'Generate vCard', contact_generate_vcard_path(@contact) %> |
 <%= link_to 'Edit', edit_contact_path(@contact) %> |
 <%= link_to 'Back', contacts_path %>

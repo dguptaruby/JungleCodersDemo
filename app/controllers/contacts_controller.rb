@@ -1,10 +1,11 @@
+require 'vpim/vcard'
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.all
+    @contacts = current_user.contacts
   end
 
   # GET /contacts/1
@@ -61,10 +62,29 @@ class ContactsController < ApplicationController
     end
   end
 
+  # Generate and download vcf file of a contact
+  def generate_vcard 
+    contact = Contact.find(params[:contact_id])
+    card = Vpim::Vcard::Maker.make2 do |maker|
+      maker.add_name {|name| name.given = contact.name}
+      if contact.address?
+        maker.add_addr do |addr|
+          addr.location = 'home'
+          addr.street = contact.address
+        end
+      end
+      maker.add_tel(contact.phone)
+      maker.add_email(contact.email)
+      maker.org = contact.organization if contact.organization?
+      maker.birthday = contact.birthday if contact.birthday?
+    end
+    send_data card.to_s, :filename => "contact.vcf"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
-      @contact = Contact.find(params[:id])
+      @contact = current_user.contacts.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
