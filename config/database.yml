@@ -1,0 +1,19 @@
+defaults: &defaults
+ adapter: postgresql
+ username: rails
+ password: rails
+ host: localhost
+
+development:
+ database: contact_details
+ <<: *defaults
+
+test:
+ database: contact_details_test
+ pool: 5
+ <<: *defaults
+production:
+ adapter: postgresql
+ encoding: unicode
+ database: contact_details_prod
+ pool: 5
