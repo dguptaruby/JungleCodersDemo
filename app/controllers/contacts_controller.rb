@@ -1,5 +1,6 @@
 require 'vpim/vcard'
 class ContactsController < ApplicationController
+  include VCardHandler
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   # GET /contacts
@@ -55,30 +56,25 @@ class ContactsController < ApplicationController
   # DELETE /contacts/1
   # DELETE /contacts/1.json
   def destroy
-    @contact.destroy
+    @contact.archived = true
+    @contact.save
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
+      format.html { redirect_to contacts_url, notice: 'Contact was successfully removed.' }
       format.json { head :no_content }
     end
   end
 
+
   # Generate and download vcf file of a contact
   def generate_vcard 
-    contact = Contact.find(params[:contact_id])
-    card = Vpim::Vcard::Maker.make2 do |maker|
-      maker.add_name {|name| name.given = contact.name}
-      if contact.address?
-        maker.add_addr do |addr|
-          addr.location = 'home'
-          addr.street = contact.address
-        end
-      end
-      maker.add_tel(contact.phone)
-      maker.add_email(contact.email)
-      maker.org = contact.organization if contact.organization?
-      maker.birthday = contact.birthday if contact.birthday?
-    end
-    send_data card.to_s, :filename => "contact.vcf"
+    contacts = current_user.contacts.where(id: params[:contact_id]).last
+    v_card_single(contacts)    
+  end
+
+  def generate_vcards
+    contacts = current_user.contacts.all
+    v_card_multiple(contacts) 
+
   end
 
   private
