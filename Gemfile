@@ -35,6 +35,10 @@ gem 'devise'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+
+# Audited can also record who made those changes, save comments and associate models related to the changes.
+gem "audited"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
