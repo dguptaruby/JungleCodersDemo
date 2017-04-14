@@ -1,8 +1,8 @@
 require 'vpim/vcard'
 class ContactsController < ApplicationController
   include VCardHandler
-  before_action :set_contact, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :set_contact, only: [:show, :edit, :update, :destroy]
   # GET /contacts
   # GET /contacts.json
   def index
@@ -80,11 +80,21 @@ class ContactsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
-      @contact = current_user.contacts.find(params[:id])
+      if has_contact?
+        @contact = current_user.contacts.friendly.find(params[:id]) 
+      else
+        flash[:error] = "No such contact found"
+        redirect_to root_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
       params.require(:contact).permit(:name, :email, :phone, :address, :organization, :birthday)
     end
+
+    def has_contact?
+      current_user.contacts.all.include? Contact.where(slug: params[:id]).first
+    end
+
 end
