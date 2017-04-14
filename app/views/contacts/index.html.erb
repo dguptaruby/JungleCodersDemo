@@ -1,8 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Contacts</h1>
-<%= link_to "Download all contacts", contact_generate_vcards_path(current_user)%>
-<table class="table table-bordered table-striped">
+
+
+
+<%= link_to "Download all contacts", contact_generate_vcards_path(current_user), class: "btn btn-primary"%>
+<br>
+
+<table class="table table-responsive table-striped" id= "contact-table">
   <thead>
     <tr>
       <th>Name</th>
@@ -11,25 +16,18 @@
       <th>Address</th>
       <th>Organization</th>
       <th>Birthday</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
-  <tbody>
+  <tbody >
     <% @contacts.each do |contact| %>
       <tr>
-        <td><%= contact.name %></td>
+        <td><%= link_to contact.name, contact , :class => "link-color"%></td>
         <td><%= contact.email %></td>
         <td><%= contact.phone %></td>
         <td><%= contact.address %></td>
         <td><%= contact.organization %></td>
         <td><%= contact.birthday %></td>
-        <td>
-          <%= link_to 'Show', contact, class: "btn btn-info" %>
-          <%= link_to 'Edit', edit_contact_path(contact), class: "btn btn-primary" %>
-          <%= link_to 'Delete', contact, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-            
-        </td>
       </tr>
     <% end %>
   </tbody>
@@ -37,4 +35,5 @@
 
 <br>
 
-<%= link_to 'New Contact', new_contact_path %>
+<%= link_to 'New Contact', new_contact_path, class: "btn btn-primary" %>
+

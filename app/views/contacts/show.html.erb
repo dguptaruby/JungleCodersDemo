@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<%= link_to 'Back', contacts_path, class: "btn btn-primary" %>
 
 <p>
   <strong>Name:</strong>
@@ -29,6 +30,6 @@
   <strong>Birthday:</strong>
   <%= @contact.birthday %>
 </p>
-<%= link_to 'Generate vCard', contact_generate_vcard_path(@contact) %> |
-<%= link_to 'Edit', edit_contact_path(@contact) %> |
-<%= link_to 'Back', contacts_path %>
+<%= link_to 'Generate vCard', contact_generate_vcard_path(@contact) , class: "btn btn-primary"%> 
+<%= link_to 'Edit', edit_contact_path(@contact), class: "btn btn-primary" %> 
+<%= link_to 'Delete', @contact, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
