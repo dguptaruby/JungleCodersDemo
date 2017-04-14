@@ -1,6 +1,6 @@
-<h1>Editing Contact</h1>
+<h1><%=t(".editing_contact") %></h1>
 
 <%= render 'form', contact: @contact %>
 
-<%= link_to 'Show', @contact %> |
-<%= link_to 'Back', contacts_path %>
+<%= link_to t('.show'), @contact %> |
+<%= link_to t('.back'), contacts_path %>

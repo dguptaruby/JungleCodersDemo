@@ -1,15 +1,15 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <%= link_to "Jungle Coders", root_path, class: "navbar-brand" %>
+      <%= link_to t(".jungle_coders"), root_path, class: "navbar-brand" %>
     </div>
     <ul class="nav navbar-nav">
     </ul>
     <div class="nav navbar-nav pull-right"> 
       <%if user_signed_in? %>
-        <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-danger pull-right" %>
+        <%= link_to t(".log_out"), destroy_user_session_path, method: :delete, class: "btn btn-danger pull-right" %>
       <%else%>          
-        <%= link_to "Log In", new_user_session_path, class: "btn btn-info pull-right" %>
+        <%= link_to t(".log_in"), new_user_session_path, class: "btn btn-info pull-right" %>
       <%end%>  
     </div>
   </div>

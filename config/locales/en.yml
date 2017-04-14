@@ -21,3 +21,22 @@
 
 en:
   hello: "Hello world"
+  contacts:
+    index: 
+      contacts: "Contacts"
+      download_all_contacts: Download all Contacts
+      new_contact: New Contact
+    edit:
+      editing_contact: Editing Contact
+      back: Back
+      show: Show
+    show:
+      generate_vCard: Generate vCard
+      back: Back
+      edit: Edit
+      delete: Delete
+  layouts:
+    header:
+      jungle_coders: Jungle Coders
+      log_out: Log Out
+      log_in: Log In
