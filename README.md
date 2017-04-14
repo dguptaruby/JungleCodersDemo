@@ -1,24 +1,23 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails version 5.0
 
-Things you may want to cover:
+===Installation
 
-* Ruby version
+- Install ruby-2.3.1 and run rvm use 2.3.1
+- Install {Bundler}[http://bundler.io/] if you haven't already
+- Database
+  - Ensure there is a postgres user in your pg database, or edit the database.yml configuration accordingly
+- +$ bundle install+
+- +$  rake db:create && rake db:migrate 
+- +$ rails s
 
-* System dependencies
+====
 
-* Configuration
+====Added Functionality
+- Create,Edit and delete contacts
+- Save single and multiple contacts as pdf
+- Search a contact among a list
+- Download single or multiple contacts as vcard
+- Friendly URLs
+- I18n setup
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
