@@ -21,3 +21,8 @@ Rails version 5.0
 - Friendly URLs
 - I18n setup
 
+
+====Add Authentication with Facebook
+- Create App Id with facebook
+- Change App-id and App-secret in to path: "app/config/intializer/devise.rb"
+
