@@ -1,10 +1,8 @@
 require 'rails_helper'
-
-RSpec.describe Contact, :type => :model do
-  user = User.first_or_create(email: 'test@yopmail.com',password: '12345678')
+RSpec.describe Contact, type: :model do
+  user = User.first_or_create(email: 'test@yopmail.com', password: '12345678')
   it 'user contact create' do
-
-    contact = user.contacts.new(name: 'Test', email: 'test@gmail.com', phone: '123456789' )
+    contact = user.contacts.new(name: 'Test', email: 'test@gmail.com', phone: '123456789')
     contact.valid?
     if contact.save
     else
@@ -23,9 +21,9 @@ RSpec.describe Contact, :type => :model do
     contact.valid?
     contact.errors.should have_key(:email)
   end
-  
+
   it 'should require phone number' do
-    contact = user.contacts.new(name: 'Test', email: 'test@gmail.com', phone: '' )
+    contact = user.contacts.new(name: 'Test', email: 'test@gmail.com', phone: '')
     contact.valid?
     contact.errors.should have_key(:phone)
   end
