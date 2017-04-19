@@ -19,6 +19,9 @@ class ContactsController < ApplicationController
   # POST /contacts.json
   def create
     @contact = current_user.contacts.new(contact_params)
+    @contact.name = params["name"]
+    @contact.email = params["email"]
+    @contact.phone = params["phone"]
     respond_to do |format|
       if @contact.save
         format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
@@ -81,7 +84,7 @@ class ContactsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def contact_params
-    params.require(:contact).permit(:name, :email, :phone, :address, :organization, :birthday)
+    params.require(:contact).permit( :address, :organization, :birthday)
   end
 
   def has_contact?

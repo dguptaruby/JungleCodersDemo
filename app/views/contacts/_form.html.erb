@@ -1,4 +1,4 @@
-<%= form_for(contact) do |f| %>
+<%= form_for @contact, :html => {:name => 'myForm'} do |f| %>
   <% if contact.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
@@ -13,17 +13,20 @@
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <input name="name" ng-model="name" required>
+    <span ng-show="myForm.name.$touched && myForm.name.$invalid">The name is required.</span>
   </div>
 
   <div class="field">
     <%= f.label :email %>
-    <%= f.text_field :email %>
+    <input name="email" ng-model="email" type="email" required>
+    <span ng-show="myForm.email.$touched && myForm.email.$invalid">The email is required or invalid.</span>
   </div>
 
   <div class="field">
     <%= f.label :phone %>
-    <%= f.text_field :phone %>
+    <input name="phone" ng-model="phone" required>
+    <span ng-show="myForm.phone.$touched && myForm.phone.$invalid">The phone is required.</span>
   </div>
 
   <div class="field">
