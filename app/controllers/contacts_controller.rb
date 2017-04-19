@@ -58,12 +58,13 @@ class ContactsController < ApplicationController
   # Generate and download vcf file of a contact
   def generate_vcard
     contacts = current_user.contacts.where(id: params[:contact_id]).last
-    v_card_single(contacts)
+    v_card_single(contacts) if contacts.present?
   end
 
   def generate_vcards
     contacts = current_user.contacts.all
-    v_card_multiple(contacts)
+    v_card_multiple(contacts) if contacts.present?
+    redirect_to 'contacts#index'
   end
 
   private

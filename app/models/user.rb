@@ -7,11 +7,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook]
   has_many :contacts, dependent: :destroy
   audited
-  validates_uniqueness_of :uid, scope: :provider
+  #validates_uniqueness_of :uid, scope: :provider
 
   def self.new_with_session(params, session)
     super.tap do |user|
-      if data == session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info']
+      if data = session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info']
         user.email = data['email'] if user.email.blank?
       end
     end
